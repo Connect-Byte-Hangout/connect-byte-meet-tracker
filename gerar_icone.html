@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+<canvas id="c16"  width="16"  height="16"></canvas>
+<canvas id="c48"  width="48"  height="48"></canvas>
+<canvas id="c128" width="128" height="128"></canvas>
+
+<br><br>
+<button onclick="baixar()">Baixar ícones</button>
+
+<script>
+  function desenhar(id, size) {
+    const canvas = document.getElementById(id);
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#b39ddb';
+    ctx.beginPath();
+    ctx.roundRect(0, 0, size, size, size * 0.2);
+    ctx.fill();
+    ctx.font = (size * 0.7) + 'px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🐙', size / 2, size / 2);
+  }
+
+  desenhar('c16',  16);
+  desenhar('c48',  48);
+  desenhar('c128', 128);
+
+  function baixar() {
+    ['c16','c48','c128'].forEach(id => {
+      const canvas = document.getElementById(id);
+      const size = id.replace('c','');
+      const a = document.createElement('a');
+      a.download = 'icon' + size + '.png';
+      a.href = canvas.toDataURL();
+      a.click();
+    });
+  }
+</script>
+</body>
+</html>
